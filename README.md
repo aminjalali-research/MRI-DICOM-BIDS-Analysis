@@ -51,7 +51,7 @@ MRI Data
 └── (1 - Localizer): Planning scan, not required
 ```
 The numbers are not correct all the time. The last one is one we aim to use for any reason they had to abort. 
-do not rely on numbers, rely on descriptions.
+do not rely on numbers, rely on descriptions. need to correct them using the SpinEcho files. need to know which ones goes with ASL or fMRI. animation visualization of 100 volumes. 
 
 # MRI Data Description
 
