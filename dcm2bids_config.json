@@ -1,0 +1,429 @@
+{
+  "descriptions": [
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "criteria": {
+        "SeriesDescription": "T1w_MPR",
+        "SeriesNumber": 3
+      },
+      "sidecarChanges": {
+        "SeriesDescription": "T1w_MPR_normalized"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "criteria": {
+        "SeriesDescription": "T2w_SPC",
+        "SeriesNumber": 5
+      },
+      "sidecarChanges": {
+        "SeriesDescription": "T2w_SPC_normalized"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "criteria": {
+        "SeriesDescription": "32_FLAIR_1mm_ipat2",
+        "SeriesNumber": 28
+      },
+      "sidecarChanges": {
+        "SeriesDescription": "FLAIR_normalized_filtered"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-HiResHp",
+      "criteria": {
+        "SeriesDescription": "TSE_HiResHp",
+        "SeriesNumber": 7
+      },
+      "sidecarChanges": {
+        "SeriesDescription": "TSE_HiResHp_normalized"
+      }
+    },
+    {
+      "dataType": "func",
+      "modalityLabel": "bold",
+      "customLabels": "task-SentenceCompletion_dir-AP",
+      "criteria": {
+        "SeriesDescription": "fMRI - Sentence Completion",
+        "SeriesNumber": 9
+      }
+    },
+    {
+      "dataType": "func",
+      "modalityLabel": "sbref",
+      "customLabels": "task-SentenceCompletion_dir-AP",
+      "criteria": {
+        "SeriesDescription": "fMRI - Sentence Completion_SBRef",
+        "SeriesNumber": 8
+      }
+    },
+    {
+      "dataType": "func",
+      "modalityLabel": "bold",
+      "customLabels": "task-WordGeneration_dir-AP",
+      "criteria": {
+        "SeriesDescription": "fMRI - Word Generation",
+        "SeriesNumber": 12
+      }
+    },
+    {
+      "dataType": "func",
+      "modalityLabel": "sbref",
+      "customLabels": "task-WordGeneration_dir-AP",
+      "criteria": {
+        "SeriesDescription": "fMRI - Word Generation_SBRef",
+        "SeriesNumber": 11
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "dir-AP",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir98_AP",
+        "SeriesNumber": 17
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "sbref",
+      "customLabels": "dir-AP",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir98_AP_SBRef",
+        "SeriesNumber": 16
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "dir-PA",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA",
+        "SeriesNumber": 20
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "sbref",
+      "customLabels": "dir-PA",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA_SBRef",
+        "SeriesNumber": 19
+      }
+    },
+    {
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "dir-AP",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_AP",
+        "SeriesNumber": 14
+      },
+      "intendedFor": [
+        "func/sub-{subject}_ses-{session}_task-SentenceCompletion_dir-AP_run-9_bold.nii.gz",
+        "func/sub-{subject}_ses-{session}_task-WordGeneration_dir-AP_run-12_bold.nii.gz",
+        "dwi/sub-{subject}_ses-{session}_dir-AP_run-17_dwi.nii.gz"
+      ]
+    },
+    {
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "dir-PA",
+      "criteria": {
+        "SeriesDescription": "SpinEchoFieldMap_PA",
+        "SeriesNumber": 15
+      },
+      "intendedFor": [
+        "func/sub-{subject}_ses-{session}_task-SentenceCompletion_dir-AP_run-9_bold.nii.gz",
+        "func/sub-{subject}_ses-{session}_task-WordGeneration_dir-AP_run-12_bold.nii.gz",
+        "dwi/sub-{subject}_ses-{session}_dir-AP_run-17_dwi.nii.gz"
+      ]
+    },
+    {
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "acq-PCASLhr_dir-AP",
+      "criteria": {
+        "SeriesDescription": "PCASLhr_SpinEchoFieldMap_AP",
+        "SeriesNumber": 36
+      },
+      "intendedFor": [
+        "perf/sub-{subject}_ses-{session}_dir-PA_run-35_asl.nii.gz"
+      ]
+    },
+    {
+      "dataType": "fmap",
+      "modalityLabel": "epi",
+      "customLabels": "acq-PCASLhr_dir-PA",
+      "criteria": {
+        "SeriesDescription": "PCASLhr_SpinEchoFieldMap_PA",
+        "SeriesNumber": 37
+      },
+      "intendedFor": [
+        "perf/sub-{subject}_ses-{session}_dir-PA_run-35_asl.nii.gz"
+      ]
+    },
+    {
+      "dataType": "perf",
+      "modalityLabel": "asl",
+      "customLabels": "dir-PA",
+      "criteria": {
+        "SeriesDescription": "mbPCASLhr_PA",
+        "SeriesNumber": 35
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "customLabels": "acq-original",
+      "criteria": {
+        "SeriesDescription": "T1w_MPR",
+        "SeriesNumber": 2
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-original",
+      "criteria": {
+        "SeriesDescription": "T2w_SPC",
+        "SeriesNumber": 4
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-HiResHpOriginal",
+      "criteria": {
+        "SeriesDescription": "TSE_HiResHp",
+        "SeriesNumber": 6
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "customLabels": "acq-original",
+      "criteria": {
+        "SeriesDescription": "32_FLAIR_1mm_ipat2_ORIG",
+        "SeriesNumber": 27
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "T1_TRA",
+        "SeriesNumber": 100,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "customLabels": "acq-derivedSag",
+      "criteria": {
+        "SeriesDescription": "T1_TRA",
+        "SeriesNumber": 100,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "customLabels": "acq-derivedCor",
+      "criteria": {
+        "SeriesDescription": "T1_COR",
+        "SeriesNumber": 101,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T1w",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "T1_COR",
+        "SeriesNumber": 101,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "T2_TRA",
+        "SeriesNumber": 102,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-derivedSag",
+      "criteria": {
+        "SeriesDescription": "T2_TRA",
+        "SeriesNumber": 102,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-derivedCor",
+      "criteria": {
+        "SeriesDescription": "T2_COR",
+        "SeriesNumber": 103,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "T2w",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "T2_COR",
+        "SeriesNumber": 103,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "FLAIR_TRA",
+        "SeriesNumber": 104,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "customLabels": "acq-derivedSag",
+      "criteria": {
+        "SeriesDescription": "FLAIR_TRA",
+        "SeriesNumber": 104,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "customLabels": "acq-derivedCor",
+      "criteria": {
+        "SeriesDescription": "FLAIR_COR",
+        "SeriesNumber": 105,
+        "ImageType": ["DERIVED", "SECONDARY", "MPR"]
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "FLAIR",
+      "customLabels": "acq-derivedTra",
+      "criteria": {
+        "SeriesDescription": "FLAIR_COR",
+        "SeriesNumber": 105,
+        "ImageType": ["DERIVED", "SECONDARY", "PROJECTION IMAGE"]
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "acq-ADC",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA_ADC",
+        "SeriesNumber": 22
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "acq-TRACEW",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA_TRACEW",
+        "SeriesNumber": 23
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "acq-FA",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA_FA",
+        "SeriesNumber": 24
+      }
+    },
+    {
+      "dataType": "dwi",
+      "modalityLabel": "dwi",
+      "customLabels": "acq-ColFA",
+      "criteria": {
+        "SeriesDescription": "dMRI_dir99_PA_ColFA",
+        "SeriesNumber": 25
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-localizer",
+      "criteria": {
+        "SeriesDescription": "Localizer"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-AAHScout",
+      "criteria": {
+        "SeriesDescription": "AAHScout"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-AAHScoutMPRsag",
+      "criteria": {
+        "SeriesDescription": "AAHScout_MPR_sag"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-AAHScoutMPRcor",
+      "criteria": {
+        "SeriesDescription": "AAHScout_MPR_cor"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-AAHScoutMPRtra",
+      "criteria": {
+        "SeriesDescription": "AAHScout_MPR_tra"
+      }
+    },
+    {
+      "dataType": "anat",
+      "modalityLabel": "localizer",
+      "customLabels": "acq-localizerAligned",
+      "criteria": {
+        "SeriesDescription": "Localizer_aligned"
+      }
+    },
+    {
+      "dataType": "misc",
+      "modalityLabel": "roi",
+      "criteria": {
+        "Filename": "*_ROI1.nii.gz"
+      }
+    }
+  ]
+}
