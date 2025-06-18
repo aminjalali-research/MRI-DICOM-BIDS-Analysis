@@ -75,3 +75,5 @@ dcm2bids -d ~/MRIProjects/data/ -p P001 -s 01 -c dcm2bids_config.json -o bids_ou
 - pandas
 - dcm2bids (for final BIDS conversion)
 
+
+Should I download the TUH dataset and work on it? Is the KGH dataset in a similar fortmat as TUH? Epilepsy corpos or seizure corpos?
