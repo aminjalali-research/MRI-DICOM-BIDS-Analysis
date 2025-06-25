@@ -8,15 +8,17 @@
 - .ent – annotations/notes metadata
 - .NPA – metadata wrapper used by NicVue
 
-Natus/Nicolet Database or EEG Viewer can export to EDF or EDF+. This is the most reliable route. [Reading xltec data](https://sccn.ucsd.edu/pipermail/eeglablist/2016/010245.html)
+Can .NPA and .e Nicolet datafile be read or anonymized? They are proprietary and can't be read [Reading xltec data](https://sccn.ucsd.edu/pipermail/eeglablist/2016/010245.html)
 
-The .erd formats are compressed and proprietary. Most users convert to EDF via Natus GUI instead.
-Archived XltekDataReader (Python) supports reading [(Link)](https://github.com/nyuolab/XltekDataReader)
+The .erd formats are compressed and proprietary. Users convert to EDF via Natus GUI instead.
+.erd can be read by unofficial code in Archived XltekDataReader (Python) [(Link)](https://github.com/nyuolab/XltekDataReader)
 
 
 https://neuroimage.usc.edu/forums/t/does-anyone-knows-how-to-read-a-nicolet-erd-file/32402
 
 ------------
+EDFExport available - what is the template - does it allow anonymisation? The template structure is undocumented publicly. 
+
 EDFExport command-line utility:
 
 ```php
@@ -29,16 +31,9 @@ Usage:
 
 -t <template> allows using a template (likely JSON or XML) to specify header contents and event inclusion.
 
-With a custom template, one can remove or anonymize patient name, ID, DOB, etc.
+With a custom template, one can remove or anonymize a patient's name, ID, DOB, etc. We need to create a template that excludes personal identifiers. Without -t, EDFExport won't know how to omit or include metadata fields.
 
 -edfplus is a quick export using default settings, including whatever default fields are defined (which likely include demographics).
-
-If you care about anonymization, you should create or use a template that excludes personal identifiers.
-
-Without -t, EDFExport won't know how to omit or include metadata fields.
-
-EDFExport anonymization: The template structure depends on Natus’s definition (likely XML/JSON); unfortunately, it's undocumented publicly. 
-The template may include fields like PatientName, ID, DOB, and Annotations, which you can blank.
 
 PyEDFlib – A well-maintained Python library for reading and writing EEG in European Data Format (EDF/EDF+). While it doesn’t read Nicolet/Natus proprietary files, it is commonly used to convert and save data to EDF once the data is loaded in Python. PyEDFlib’s high-level interface supports easy EDF export and even built-in anonymization functions. For example, pyedflib.highlevel.anonymize_edf() will overwrite patient-identifying header fields (like patient name 
 or birthdate) with dummy values.
