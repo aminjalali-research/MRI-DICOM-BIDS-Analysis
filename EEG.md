@@ -51,17 +51,17 @@ The EDFExport utility relies on the Natus software environment (not open-source)
 
 ----------
 
-NicVue .NPA (Patient Archive) Files:
-.NPA files are NicVue database archives of patient and study metadata used by older Nicolet systems. There is no publicly documented Python library 
+# NicVue .NPA Files:
+
+These files are patients' metadata used by older Nicolet systems. There is no publicly documented Python library 
 for reading .NPA files directly, these are typically handled with Natus’s own applications. 
-In practice, one would use the NicVue/NeuroWorks software to extract or export data from a NicVue database. 
-For instance, Natus provided a Platform Migration Utility to migrate data from legacy NicVue systems into a NeuroWorks database
+
+Natus provided a Platform Migration Utility to migrate data from legacy NicVue systems into a NeuroWorks database
 [download.xltek.com](https://download.xltek.com/eeg/Software/Neuroworks/DOC-020491%20REV%2005%20-%20Platform%20Migration%20Utility%20User%20Guide.pdf#:~:text=from%20legacy%20source%20systems%20such,Database%20application%2C%20used%20with%20NeuroWorks). 
+
 In research contexts, the usual approach is to export EEG recordings to EDF via NicVue/NeuroWorks itself, rather than parse .NPA in code. 
 (Notably, the Temple University Hospital EEG Corpus was originally in Natus proprietary format and was converted to EDF using NicVue software
 [par.nsf.gov](https://par.nsf.gov/servlets/purl/10199699#:~:text=,proprietary%20NicVue%20software%20tool).
-If you need information from NicVue .NPA files, you will likely use Natus’s tools or have the data migrated into a format like EDF or a SQL database,
-after which Python tools (as above) can be applied for further conversion and anonymization.
 
 ------
 Read EEG data from Natus Neuroworks systems:
@@ -117,4 +117,13 @@ with open('study_info_anonymized.json', 'w') as f:
 
 print("EEG data loaded and anonymized metadata saved.")
 ```
+------
+
+# Codes under consideration for EEG analysis
+Sent the request form to access TUH dataset
+  
+- https://github.com/UnitedHolmes/seizure_detection_EEGs_transformer_BHI_2023
+- https://github.com/pulp-bio/Artifact-Seizure
+  
+
 
