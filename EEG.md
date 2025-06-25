@@ -1,6 +1,5 @@
 # EEG-EMU
 
-
 1. Nicolet NicVue files (.NPA, .e, .eeg) file types:
 
 - .e or .eeg – primary EEG data
@@ -13,7 +12,6 @@ Can .NPA and .e Nicolet datafile be read or anonymized? They are proprietary and
 The .erd formats are compressed and proprietary. Users convert to EDF via Natus GUI instead.
 .erd can be read by unofficial code in Archived XltekDataReader (Python) [(Link)](https://github.com/nyuolab/XltekDataReader)
 
-
 https://neuroimage.usc.edu/forums/t/does-anyone-knows-how-to-read-a-nicolet-erd-file/32402
 
 ------------
@@ -25,7 +23,6 @@ EDFExport command-line utility:
 Usage:
   EDFExport -s <study> [-t <template> | -edfplus] [-o <path>]
   EDFExport -s path/to/study -t path/to/my_template.xml -o path/to/output_dir
-
 ```
 -s <study> points to the recorded study folder.
 
@@ -35,24 +32,22 @@ With a custom template, one can remove or anonymize a patient's name, ID, DOB, e
 
 -edfplus is a quick export using default settings, including whatever default fields are defined (which likely include demographics).
 
-PyEDFlib – A well-maintained Python library for reading and writing EEG in European Data Format (EDF/EDF+). While it doesn’t read Nicolet/Natus proprietary files, it is commonly used to convert and save data to EDF once the data is loaded in Python. PyEDFlib’s high-level interface supports easy EDF export and even built-in anonymization functions. For example, pyedflib.highlevel.anonymize_edf() will overwrite patient-identifying header fields (like patient name 
-or birthdate) with dummy values.
+PyEDFlib – A Python library for reading and writing EEG in (EDF/EDF+). While it doesn’t read Nicolet/Natus proprietary files, it is commonly used to convert and save data to EDF with anonymization functions. For example, pyedflib.highlevel.anonymize_edf() will overwrite patient-identifying header fields with dummy values.
 
 --------
 # Natus Official Export Tools
-Natus EDFExport Utility (NeuroWorks) – Natus’s software suite includes a batch export tool, EDFExport.exe, for converting proprietary files to EDF/EDF+. This utility is part of the NeuroWorks installation (typically located in C:\Neuroworks\EDFExport.exe)
+
+Natus’s software suite includes a batch export tool, EDFExport.exe, for converting proprietary files to EDF/EDF+. This utility is part of the NeuroWorks installation
 https://data2bids.greydongilmore.com/run_data2bids/04_neuroworks_export#:~:text=2,batch%20export%20of%20EDF%20files
 
- Users first create an export template (.exp file) within NeuroWorks: this template defines which channels to include, the format (EDF or EDF+), and options like whether to de-identify patient info. 
- The template is saved under the Neuroworks Settings directory and must remain there for the exporter to use it. 
- Once the template is prepared, batch conversion is done via command-line. One writes a text file listing the studies (paths to the .eeg files), then runs EDFExport with the template, for example:
+Users first create an export template (.exp file) within NeuroWorks: this template defines which channels to include and to de-identify patient info. The template is saved under the Neuroworks Settings directory and must remain there for the exporter to use it. 
+Once the template is prepared, batch conversion is done via command-line. One writes a text file listing the studies (paths to the .eeg files), then runs EDFExport with the template, for example:
 
 ```text
 "C:\Neuroworks\EDFExport.exe" -f "studies_list.txt" -o "output_folder\"
 ```
-This will output EDF/EDF+ files for each study. Note: If the template’s de-identification option is used, patient fields in the EDF header will be blanked 
-during export – otherwise, one can post-process the EDFs with tools like those above to remove identifiers. The EDFExport utility relies on the Natus 
-software environment (not open-source), but it is the officially supported path for converting Nicolet/Natus data to EDF.
+This will output EDF/EDF+ files for each study. 
+The EDFExport utility relies on the Natus software environment (not open-source).
 
 ----------
 
