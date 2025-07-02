@@ -21,7 +21,6 @@ print(masked)
 ```
 
 The original tensor has values from 0 to 39 arranged in shape (2, 5, 4). After calling mask_channels on channels 1, 2, and 3, all those channels become zeros for both batches.  
-![Image](images/model.png)
 
 ```python
 Original data:
@@ -53,6 +52,11 @@ tensor([[[ 0.,  1.,  2.,  3.],
 # Function 2: Masks a percentage of the time axis
 - Standardization: By first converting the Python input to a NumPy array `(np.array(data))` and then to PyTorch tensors `torch.from_numpy(np.array(data))`, we ensure that no matter how it started, it ends up as a PyTorch tensor—ready for downstream processing.
 - Randomly selects a contiguous range of time steps to mask (set to zero), based on `mask_percentage`.
+
+<p align="center">
+  <img src="images/Model.png" width="500" height="200"/>
+</p>
+
 
 ```python
 def collate_mask_time(data, mask_percentage):
