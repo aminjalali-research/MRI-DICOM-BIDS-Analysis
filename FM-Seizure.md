@@ -20,7 +20,8 @@ print("\nMasked data:")
 print(masked)
 ```
 
-The original tensor has values from 0 to 39 arranged in shape (2, 5, 4). After calling mask_channels on channels 1, 2, and 3, all those channels become zeros for both batches.
+The original tensor has values from 0 to 39 arranged in shape (2, 5, 4). After calling mask_channels on channels 1, 2, and 3, all those channels become zeros for both batches.  
+![Image](images/model.png)
 
 ```python
 Original data:
