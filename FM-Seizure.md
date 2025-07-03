@@ -259,13 +259,13 @@ standard_channels = [...]
 
 ```python
 def split_and_dump(params):
-    fetch_folder, sub, dump_folder, label = params
+    fetch_folder, sub, dump_folder, label = params     #Function to process and save samples for one subject.
     for file in os.listdir(fetch_folder):
-        if sub in file:
+        if sub in file:        # If sub (subject identifier) is in the filename, it will process that file.
             print("process", file)
             file_path = os.path.join(fetch_folder, file)
             raw = mne.io.read_raw_edf(file_path, preload=True)
-            try:
+            try:                # Remove unwanted channels (if present) from the data.
                 if drop_channels is not None:
                     useless_chs = []
                     for ch in drop_channels:
@@ -277,9 +277,9 @@ def split_and_dump(params):
                 if raw.ch_names != chOrder_standard:
                     raise Exception("channel order is wrong!")
 
-                raw.filter(l_freq=0.1, h_freq=75.0)
-                raw.notch_filter(50.0)
-                raw.resample(200, n_jobs=5)
+                raw.filter(l_freq=0.1, h_freq=75.0) # Band-pass filters between 0.1–75 Hz (remove slow drifts and high freq noise).
+                raw.notch_filter(50.0)    # Notch filter at 50 Hz (removes power line noise).
+                raw.resample(200, n_jobs=5)    # Resamples data to 200 Hz for consistency, using 5 CPU cores.
 
                 ch_name = raw.ch_names
                 raw_data = raw.get_data(units='uV')
@@ -288,15 +288,36 @@ def split_and_dump(params):
                 with open("tuab-process-error-files.txt", "a") as f:
                     f.write(file + "\n")
                 continue
-            for i in range(channeled_data.shape[1] // 2000):
-                dump_path = os.path.join(
-                    dump_folder, file.split(".")[0] + "_" + str(i) + ".pkl"
-                )
-                pickle.dump(
-                    {"X": channeled_data[:, i * 2000 : (i + 1) * 2000], "y": label},
-                    open(dump_path, "wb"),
-                )
+
+            for i in range(channeled_data.shape[1] // 2000):    # Splits the data into chunks of 2k samples (i.e., 10 seconds if sampling at 200 Hz).
+                dump_path = os.path.join(dump_folder, file.split(".")[0] + "_" + str(i) + ".pkl")
+                pickle.dump({"X": channeled_data[:, i * 2000 : (i + 1) * 2000], "y": label}, open(dump_path, "wb"), )
 ```
+
+Gets all unique abnormal subject IDs (from file names), shuffles, and splits into train (80%) and validation (20%).
+The same process is repeated for normal subjects, and for test sets (but no split for test).
+
+```python
+if __name__ == "__main__":
+    root = "/userhome1/jiangweibang/Datasets/TUH_Abnormal/v3.0.0/edf/"
+    channel_std = "01_tcp_ar"
+
+    train_val_abnormal = os.path.join(root, "train", "abnormal", channel_std)
+    train_val_a_sub = list(set([item.split("_")[0] for item in os.listdir(train_val_abnormal)]))
+    np.random.shuffle(train_val_a_sub)
+    train_a_sub, val_a_sub = (
+        train_val_a_sub[: int(len(train_val_a_sub) * 0.8)],
+        train_val_a_sub[int(len(train_val_a_sub) * 0.8) :],
+    )
+
+    with Pool(processes=24) as pool:    #Runs processing in parallel using 24 CPU cores.
+        result = pool.map(split_and_dump, parameters)
+```
+
+
+
+
+
 
 
 
