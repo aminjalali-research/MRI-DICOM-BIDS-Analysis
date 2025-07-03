@@ -242,11 +242,61 @@ lst = MyList([1, 2, 3])
 print(len(lst))    # 3
 print(lst[1])      # 2
 ```
+# Function 3: Data Processing 
+```python
+import os          # File and directory handling
+import pickle      # Serialize Python objects (for saving data)
+from multiprocessing import Pool  # Parallel processing
+import numpy as np # Numerical computing
+import mne         # EEG/MEG data handling (MNE-Python)
+
+drop_channels = [...] # Channels to remove from EEG, such as artifacts, unused, or auxiliary channels.
+drop_channels.extend([f'EEG {i}-REF' for i in range(20, 129)]) #The `.extend()` adds all EEG channels from 20 to 128 (inclusive) to drop list.
+chOrder_standard = [...] # Defines the exact order of EEG channels expected for consistent analysis.
+standard_channels = [...]
+```
 
 
+```python
+def split_and_dump(params):
+    fetch_folder, sub, dump_folder, label = params
+    for file in os.listdir(fetch_folder):
+        if sub in file:
+            print("process", file)
+            file_path = os.path.join(fetch_folder, file)
+            raw = mne.io.read_raw_edf(file_path, preload=True)
+            try:
+                if drop_channels is not None:
+                    useless_chs = []
+                    for ch in drop_channels:
+                        if ch in raw.ch_names:
+                            useless_chs.append(ch)
+                    raw.drop_channels(useless_chs)
+                if chOrder_standard is not None and len(chOrder_standard) == len(raw.ch_names):
+                    raw.reorder_channels(chOrder_standard)
+                if raw.ch_names != chOrder_standard:
+                    raise Exception("channel order is wrong!")
 
+                raw.filter(l_freq=0.1, h_freq=75.0)
+                raw.notch_filter(50.0)
+                raw.resample(200, n_jobs=5)
 
-
+                ch_name = raw.ch_names
+                raw_data = raw.get_data(units='uV')
+                channeled_data = raw_data.copy()
+            except:
+                with open("tuab-process-error-files.txt", "a") as f:
+                    f.write(file + "\n")
+                continue
+            for i in range(channeled_data.shape[1] // 2000):
+                dump_path = os.path.join(
+                    dump_folder, file.split(".")[0] + "_" + str(i) + ".pkl"
+                )
+                pickle.dump(
+                    {"X": channeled_data[:, i * 2000 : (i + 1) * 2000], "y": label},
+                    open(dump_path, "wb"),
+                )
+```
 
 
 
