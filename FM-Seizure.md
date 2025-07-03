@@ -198,6 +198,60 @@ def __init_dataset(self) -> None:
 ```
 
 # "Properties" and "Magic Methods" in Python
+"Properties" make methods in your class look like normal variables and read-only to users of the class.
+For example, `.area` looks like a variable but is actually computed when accessed.
+```python
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def area(self):
+        # Looks like an attribute, but is calculated on-the-fly
+        return 3.14 * self._radius ** 2
+
+c = Circle(5)
+print(c.area)  # 78.5
+```
+
+Magic Methods (also called dunder methods for “double underscore,” like __len__, __getitem__, etc.) make objects behave like built-in types (lists, dicts). To allow objects to be used with Python’s special syntax (len(obj), obj[2], str(obj), etc.)
+
+Common Magic Methods:
+- `__len__(self)` → For len(obj)
+- `__getitem__(self, index)` → For obj[index]
+- `__setitem__(self, index, value)` → For assignment like obj[index] = value
+- `__str__(self)` → For str(obj) or print(obj)
+- `__init__(self, ...)` → The constructor! It lets you set up initial values (attributes) for your object.
+
+The `MyList` custom class acts like a list! Without `__init__`, every object would be identical or incomplete. 
+The objects won’t have any custom attributes unless you add them after creation.
+`self` refers to the object being created.
+
+```python
+class MyList:
+    def __init__(self, items):
+        self.items = items
+
+    def __len__(self):
+        return len(self.items)
+
+    def __getitem__(self, index):
+        return self.items[index]
+
+lst = MyList([1, 2, 3])
+print(len(lst))    # 3
+print(lst[1])      # 2
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
