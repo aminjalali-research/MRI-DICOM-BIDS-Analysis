@@ -155,21 +155,49 @@ class SingleShockDataset(Dataset):
         self.__feature_size[1] = self.__window_size  # Set feature size to match window
 ```
 
+# Properties and Magic Methods
+```python
+@property
+def feature_size(self):
+    return self.__feature_size
 
+def __len__(self):   # Length (number of samples/windows)
+    return self.__length
 
+def __getitem__(self, idx: int):     # Find which subject this sample comes from (bisect for fast search). Calculate local window start for that subject.
+                                     # Return EEG data: all channels, windowed timepoints.
+    subject_idx = bisect.bisect(self.__global_idxes, idx) - 1
+    item_start_idx = (idx - self.__global_idxes[subject_idx]) * self.__stride_size + self.__local_idxes[subject_idx]
+    return self.__file[self.__subjects[subject_idx]]['eeg'][:, item_start_idx:item_start_idx+self.__window_size]
 
+def free(self) -> None:  # Free resources (close file)
+    if self.__file:
+        self.__file.close()
+        self.__file = None
 
+def get_ch_names(self):   # Get Channel Names
+    return self.__file[self.__subjects[0]]['eeg'].attrs['chOrder']
 
-
-
-
-
-
-
+```
 
 # Combine multiple files into one big dataset 
-This makes it easy to load, slice, and batch EEG data for neural network training.
+This makes it easy to load, slice, and batch EEG data for neural network training. Makes a list of SingleShockDataset (one per file).
+Calculates cumulative sample indices for efficient lookup. Sets overall dataset length and shape.
 
+```python
+def __init_dataset(self) -> None:
+    self.__datasets = [SingleShockDataset(file_path, self.__window_size, self.__stride_size, self.__start_percentage, self.__end_percentage) for file_path in self.__file_paths]
+    
+    dataset_idx = 0
+    for dataset in self.__datasets:
+        self.__dataset_idxes.append(dataset_idx)
+        dataset_idx += len(dataset)
+    self.__length = dataset_idx
+
+    self.__feature_size = self.__datasets[0].feature_size
+```
+
+# "Properties" and "Magic Methods" in Python
 
 
 
