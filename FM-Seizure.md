@@ -93,8 +93,82 @@ tensor([[[0.00, 0.00, 0.02, 0.03],
          [0.00, 0.00, 0.38, 0.39]]])
 ```
 
+# Read one HDF5 file, slicing the EEG data into overlapping windows
+```python
+import h5py         # For reading HDF5 data files
+import bisect       # For fast index searching (binary search)
+from pathlib import Path   # For safe file path operations
+from typing import List    # For type annotations
+from torch.utils.data import Dataset  # Base class for PyTorch datasets
+
+list_path = List[Path]    # Type alias: list of Path objects
+```
+
+Class Declaration which inherits from PyTorch's `Dataset`, so you can use it in DataLoader.
 
 
+```python
+class SingleShockDataset(Dataset):
+    # Define the constructor
+    def __init__(self, file_path: Path, window_size: int=200, stride_size: int=1, start_percentage: float=0, end_percentage: float=1):
+        self.__file_path = file_path
+        self.__window_size = window_size      # Length of each sample window (e.g., 200 timepoints)
+        self.__stride_size = stride_size      # Step between consecutive windows (e.g., 1 = highly overlapping)
+        self.__start_percentage = start_percentage   # For subsampling data from the start
+        self.__end_percentage = end_percentage       # For subsampling data to the end
+
+        self.__file = None
+        self.__length = None
+        self.__feature_size = None
+
+        self.__subjects = []         # List of all subjects in this file
+        self.__global_idxes = []     # List of global start indices for each subject's data in the dataset
+        self.__local_idxes = []      # List of local start indices (relative to each subject)
+
+        self.__init_dataset()        # Actually load file and prepare index bookkeeping
+
+    # Open file for reading (h5py.File) and list all subjects (e.g., subject_001, subject_002).
+    # `-> None` means: This function does not return anything. `-> int`	Returns an integer. `-> List[str]`	Returns a list of strings.
+    def __init_dataset(self) -> None:          
+        self.__file = h5py.File(str(self.__file_path), 'r')
+        self.__subjects = [i for i in self.__file]
+
+    global_idx = 0
+    for subject in self.__subjects:
+        self.__global_idxes.append(global_idx) # Store the running total of samples so far
+
+        subject_len = self.__file[subject]['eeg'].shape[1]  # Number of time points in this subject
+        total_sample_num = (subject_len-self.__window_size) // self.__stride_size + 1
+
+        # Calculate how many windows you can get for each subject, given the window and stride.
+        # E.g., if you have 1000 points, window=200, stride=100 → (1000-200)//100+1 = 9 samples.
+
+        start_idx = int(total_sample_num * self.__start_percentage) * self.__stride_size 
+        end_idx = int(total_sample_num * self.__end_percentage - 1) * self.__stride_size
+
+        self.__local_idxes.append(start_idx) #Store starting index for this subject and increment total global count.
+        global_idx += (end_idx - start_idx) // self.__stride_size + 1
+
+        self.__length = global_idx  # Total number of windows in this dataset
+
+        self.__feature_size = [i for i in self.__file[self.__subjects[0]]['eeg'].shape]
+        self.__feature_size[1] = self.__window_size  # Set feature size to match window
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Combine multiple files into one big dataset 
+This makes it easy to load, slice, and batch EEG data for neural network training.
 
 
 
