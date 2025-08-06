@@ -110,9 +110,19 @@ The channel numbers in `.rec` and `.lab` files refer to channels defined using a
 
 # Cuda mismatch
 I installed Driver Version: 575.64.05 and CUDA Version: 12.9 (this is compatible with your RTX 5070 Ti!), and for the conda environment pytorch-cuda=11.8:
-- conda remove pytorch torchvision torchaudio pytorch-cuda
-- conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+```bash
+conda create -n labram python=3.11
+conda activate labram
+conda remove pytorch torchvision torchaudio pytorch-cuda
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+(NOT this) conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+conda install tensorboardX
+pip install -r requirements.txt
 
+python dataset_maker/make_TUEV.py
+root = "/path/to/your/TUH_Event/v2.0.0/edf"
+Fixed the bug in dataset generation
+```
 
 # LaBraM Fine-tuning Results on TUEV Dataset
 - Model: LaBraM Base (labram_base_patch200_200)
