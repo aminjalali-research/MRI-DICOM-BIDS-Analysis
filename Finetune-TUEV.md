@@ -109,6 +109,33 @@ The channel numbers in `.rec` and `.lab` files refer to channels defined using a
 - SeizIt1: population 14
 
 # Cuda mismatch
-I installed Driver Version: 575.64.05 and CUDA Version: 12.9, and for the conda environment pytorch-cuda=11.8:
+I installed Driver Version: 575.64.05 and CUDA Version: 12.9 (this is compatible with your RTX 5070 Ti!), and for the conda environment pytorch-cuda=11.8:
 - conda remove pytorch torchvision torchaudio pytorch-cuda
 - conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+
+
+# LaBraM Fine-tuning Results on TUEV Dataset
+- Model: LaBraM Base (labram_base_patch200_200)
+- Task: 6-class EEG event classification
+- Parameters: 5.82M trainable parameters
+
+## Training Results
+
+| Epoch | Train Loss | Train Acc | Val Acc | Test Acc | Val F1 | Test F1 | Cohen's κ |
+|-------|------------|-----------|---------|----------|--------|---------|-----------|
+| 0     | 1.065      | 76.3%     | 77.3%   | 81.9%    | 78.1%  | 81.8%   | 0.632     |
+| 1     | 0.557      | 94.4%     | 80.7%   | 79.9%    | 81.6%  | 81.1%   | 0.693     |
+| 2     | 0.502      | 96.7%     | 73.1%   | 79.0%    | 73.0%  | 79.9%   | 0.580     |
+| 3     | 0.488      | 97.3%     | 78.1%   | 77.2%    | 79.3%  | 78.8%   | 0.660     |
+| 4     | 0.481      | 97.6%     | 72.5%   | 81.2%    | 71.2%  | 81.9%   | 0.567     |
+| **5** | **0.472**  | **98.0%** | **83.3%** | **81.9%** | **83.9%** | **82.5%** | **0.734** |
+| 6     | 0.467      | 98.2%     | 74.6%   | 80.8%    | 75.7%  | 81.7%   | 0.605     |
+
+## Training Configuration
+- Batch Size: 64
+- Learning Rate: 5e-4
+- Weight Decay: 0.05
+- Warmup Epochs: 5
+- Total Epochs: 50 
+- Layer Decay: 0.65
+- Drop Path: 0.1
