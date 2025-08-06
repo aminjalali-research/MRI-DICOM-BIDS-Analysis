@@ -1,103 +1,109 @@
 # Database: TUH EEG Event Corpus
-Dataset contains events including periodic lateralized epileptiform discharge, generalized periodic epileptiform discharge,
-spike and/or sharp wave discharges, artifact, and eye movement. 
 
+Dataset contains events including periodic lateralized epileptiform discharge, generalized periodic epileptiform discharge, spike and/or sharp wave discharges, artifact, and eye movement.
 
-00002275_00000001.edf: The actual edf file. 
-		      00002275: a reference to the train index. 
-		      00000001: indicating that this is the first file in
-		      associated with this patient. 
+## File Naming Convention
+
+**Example:** `00002275_00000001.edf`
+- `00002275`: Reference to the train index
+- `00000001`: Indicates this is the first file associated with this patient
+- `.edf`: The actual EDF file containing EEG data
+
+## File Types
 
 There are six types of files in this release:
 
- *.edf: the EEG sampled data in European Data Format (edf) 
+| Extension | Description |
+|-----------|-------------|
+| `*.edf` | EEG sampled data in European Data Format (EDF) |
+| `*.htk` | Feature extraction based on "Improved EEG Event Classification Using Differential Energy" |
+| `*.lab` | Annotation file with labels for every 10 microseconds, named by channel number |
+| `*.rec` | Annotation file with labels given in seconds |
 
- *.htk: feature extraction based on the approach explained in "Improved EEG 
-        Event Classification Using Differential Energy".
+## Label Codes
 
- *.lab: annotation file with a label given for every 10 microseconds. named 
-        according to channel number. 
+### Lab Files (4-letter codes)
 
- *.rec: annotation file with labels given in seconds. 
+| Code | Description |
+|------|-------------|
+| `spsw` | Spike and slow wave |
+| `gped` | Generalized periodic epileptiform discharge |
+| `pled` | Periodic lateralized epileptiform discharge |
+| `eyem` | Eye movement |
+| `artf` | Artifact |
+| `bckg` | Background |
 
-lab files use 4 letter codes: 
+**Format:** `117100000 117200000 eyem`
+- Fields: start time, stop time (in 10s of microseconds), label
 
- spsw: spike and slow wave
- gped: generalized periodic epileptiform discharge
- pled: periodic lateralized epileptiform dischage
- eyem: eye movement
- artf: artifact
- bckg: background
+### Rec Files (numeric codes)
 
-In the format:
+| Code | Description |
+|------|-------------|
+| 1 | spsw (spike and slow wave) |
+| 2 | gped (generalized periodic epileptiform discharge) |
+| 3 | pled (periodic lateralized epileptiform discharge) |
+| 4 | eyem (eye movement) |
+| 5 | artf (artifact) |
+| 6 | bckg (background) |
 
- 117100000 117200000 eyem
+**Format:** `13,90.4,91.4,6`
+- Fields: channel number, start time (seconds), stop time (seconds), label
 
-The fields are: start and stop time in 10s of microseconds and label
+## Channel Montage (ACNS TCP)
 
-rec files use numeric codes:
+The channel numbers in `.rec` and `.lab` files refer to channels defined using a standard ACNS TCP montage:
 
- 1: spsw
- 2: gped
- 3: pled
- 4: eyem
- 5: artf
- 6: bckg
+| Channel | Name | Definition |
+|---------|------|------------|
+| 0 | FP1-F7 | EEG FP1-REF -- EEG F7-REF |
+| 1 | F7-T3 | EEG F7-REF -- EEG T3-REF |
+| 2 | T3-T5 | EEG T3-REF -- EEG T5-REF |
+| 3 | T5-O1 | EEG T5-REF -- EEG O1-REF |
+| 4 | FP2-F8 | EEG FP2-REF -- EEG F8-REF |
+| 5 | F8-T4 | EEG F8-REF -- EEG T4-REF |
+| 6 | T4-T6 | EEG T4-REF -- EEG T6-REF |
+| 7 | T6-O2 | EEG T6-REF -- EEG O2-REF |
+| 8 | A1-T3 | EEG A1-REF -- EEG T3-REF |
+| 9 | T3-C3 | EEG T3-REF -- EEG C3-REF |
+| 10 | C3-CZ | EEG C3-REF -- EEG CZ-REF |
+| 11 | CZ-C4 | EEG CZ-REF -- EEG C4-REF |
+| 12 | C4-T4 | EEG C4-REF -- EEG T4-REF |
+| 13 | T4-A2 | EEG T4-REF -- EEG A2-REF |
+| 14 | FP1-F3 | EEG FP1-REF -- EEG F3-REF |
+| 15 | F3-C3 | EEG F3-REF -- EEG C3-REF |
+| 16 | C3-P3 | EEG C3-REF -- EEG P3-REF |
+| 17 | P3-O1 | EEG P3-REF -- EEG O1-REF |
+| 18 | FP2-F4 | EEG FP2-REF -- EEG F4-REF |
+| 19 | F4-C4 | EEG F4-REF -- EEG C4-REF |
+| 20 | C4-P4 | EEG C4-REF -- EEG P4-REF |
+| 21 | P4-O2 | EEG P4-REF -- EEG O2-REF |
 
-In the format: 13,90.4,91.4,6
-The fields are: channel number, start time in seconds, stop time in seconds, and label. 
+> **Note:** Channel 1 represents the difference between electrodes F7 and T3, calculated as (F7-REF)-(T3-REF), where both channels are contained in the EDF file.
 
-The channel number in .rec and .lab files refers to the channels
-defined using a standard ACNS TCP montage. This is our preferred way
-of viewing seizure data. The montage is defined as follows:
+## Dataset Statistics
 
- montage =  0, FP1-F7: EEG FP1-REF --  EEG F7-REF
- montage =  1, F7-T3:  EEG F7-REF  --  EEG T3-REF
- montage =  2, T3-T5:  EEG T3-REF  --  EEG T5-REF
- montage =  3, T5-O1:  EEG T5-REF  --  EEG O1-REF
- montage =  4, FP2-F8: EEG FP2-REF --  EEG F8-REF
- montage =  5, F8-T4 : EEG F8-REF  --  EEG T4-REF
- montage =  6, T4-T6:  EEG T4-REF  --  EEG T6-REF
- montage =  7, T6-O2:  EEG T6-REF  --  EEG O2-REF
- montage =  8, A1-T3:  EEG A1-REF  --  EEG T3-REF
- montage =  9, T3-C3:  EEG T3-REF  --  EEG C3-REF
- montage = 10, C3-CZ:  EEG C3-REF  --  EEG CZ-REF
- montage = 11, CZ-C4:  EEG CZ-REF  --  EEG C4-REF
- montage = 12, C4-T4:  EEG C4-REF  --  EEG T4-REF
- montage = 13, T4-A2:  EEG T4-REF  --  EEG A2-REF
- montage = 14, FP1-F3: EEG FP1-REF --  EEG F3-REF
- montage = 15, F3-C3:  EEG F3-REF  --  EEG C3-REF
- montage = 16, C3-P3:  EEG C3-REF  --  EEG P3-REF
- montage = 17, P3-O1:  EEG P3-REF  --  EEG O1-REF
- montage = 18, FP2-F4: EEG FP2-REF --  EEG F4-REF
- montage = 19, F4-C4:  EEG F4-REF  --  EEG C4-REF
- montage = 20, C4-P4:  EEG C4-REF  --  EEG P4-REF
- montage = 21, P4-O2:  EEG P4-REF  --  EEG O2-REF
+### Evaluation Set
+- **Total files:** 159
+  - containing `spsw`: 9
+  - containing `gped`: 28
+  - containing `pled`: 33
+  - containing `artf`: 46
+  - containing `eyem`: 35
+  - containing `bckg`: 89
 
-For example, channel 1 is a difference between electrodes F7 and T3,
-and represents an arithmetic difference of the channels
-(F7-REF)-(T3-REF), which are channnels contained in the EDF file.
-
-Finally, here are some basic descriptive statistics about the data:
-
-EVALUATION SET:
-
-files: 159
-       containing spsw: 9
-       containing gped: 28
-       containing pled: 33
-       containing artf: 46
-       containing eyem: 35 
-       containing bckg: 89
-
-TRAINING SET:
-
-files: 359
-       containing spsw: 27
-       containing gped: 51
-       containing pled: 48
-       containing artf: 164
-       containing eyem: 46 
-       containing bckg: 211
-
-
+### Training Set
+- **Total files:** 359
+  - containing `spsw`: 27
+  - containing `gped`: 51
+  - containing `pled`: 48
+  - containing `artf`: 164
+  - containing `eyem`: 46
+  - containing `bckg`: 211
+ 
+# Other Datasets:
+- TUEP (Epilepsy classification - binary), TUSZ (Seizure type classification - multiclass)
+- CHB-MIT (Peadiatric seizure detection - binary): Population 23
+- MAYO (Seizure detection and multi-class classification): Population 39
+- FNUSA (Seizure detection and multi-class classification)
+- SeizIt1: population 14
