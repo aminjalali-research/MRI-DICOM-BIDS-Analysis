@@ -107,3 +107,8 @@ The channel numbers in `.rec` and `.lab` files refer to channels defined using a
 - MAYO (Seizure detection and multi-class classification): Population 39
 - FNUSA (Seizure detection and multi-class classification)
 - SeizIt1: population 14
+
+# Cuda mismatch
+I installed Driver Version: 575.64.05 and CUDA Version: 12.9, and for the conda environment pytorch-cuda=11.8:
+- conda remove pytorch torchvision torchaudio pytorch-cuda
+- conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
