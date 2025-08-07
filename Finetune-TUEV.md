@@ -103,7 +103,7 @@ The channel numbers in `.rec` and `.lab` files refer to channels defined using a
  
 # Other Datasets:
 - TUEP (Epilepsy classification - binary), TUSZ (Seizure type classification - multiclass)
-- CHB-MIT (Peadiatric seizure detection - binary): Population 23
+- CHB-MIT (Peadiatric seizure detection - binary): Population 23 https://github.com/IBM/eeg-ieeg-brain-compressor
 - MAYO (Seizure detection and multi-class classification): Population 39
 - FNUSA (Seizure detection and multi-class classification)
 - SeizIt1: population 14
