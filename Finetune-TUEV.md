@@ -1,29 +1,5 @@
 # Database: TUH EEG Event Corpus
 
-Dataset contains events including periodic lateralized epileptiform discharge, generalized periodic epileptiform discharge, spike and/or sharp wave discharges, artifact, and eye movement.
-
-## File Naming Convention
-
-**Example:** `00002275_00000001.edf`
-- `00002275`: Reference to the train index
-- `00000001`: Indicates this is the first file associated with this patient
-- `.edf`: The actual EDF file containing EEG data
-
-## File Types
-
-There are six types of files in this release:
-
-| Extension | Description |
-|-----------|-------------|
-| `*.edf` | EEG sampled data in European Data Format (EDF) |
-| `*.htk` | Feature extraction based on "Improved EEG Event Classification Using Differential Energy" |
-| `*.lab` | Annotation file with labels for every 10 microseconds, named by channel number |
-| `*.rec` | Annotation file with labels given in seconds |
-
-## Label Codes
-
-### Lab Files (4-letter codes)
-
 | Code | Description |
 |------|-------------|
 | `spsw` | Spike and slow wave |
@@ -49,6 +25,22 @@ There are six types of files in this release:
 
 **Format:** `13,90.4,91.4,6`
 - Fields: channel number, start time (seconds), stop time (seconds), label
+
+## File Naming Convention
+
+**Example:** `00002275_00000001.edf`
+- `00002275`: Reference to the train index
+- `00000001`: Indicates this is the first file associated with this patient
+- `.edf`: The actual EDF file containing EEG data
+
+## File Types
+
+| Extension | Description |
+|-----------|-------------|
+| `*.edf` | EEG sampled data in European Data Format (EDF) |
+| `*.htk` | Feature extraction based on "Improved EEG Event Classification Using Differential Energy" |
+| `*.lab` | Annotation file with labels for every 10 microseconds, named by channel number |
+| `*.rec` | Annotation file with labels given in seconds |
 
 ## Channel Montage (ACNS TCP)
 
@@ -103,7 +95,7 @@ The channel numbers in `.rec` and `.lab` files refer to channels defined using a
  
 # Other Datasets:
 - TUEP (Epilepsy classification - binary), TUSZ (Seizure type classification - multiclass)
-- CHB-MIT (Peadiatric seizure detection - binary): Population 23 https://github.com/IBM/eeg-ieeg-brain-compressor
+- CHB-MIT (Peadiatric seizure detection - binary): Population 23 
 - MAYO (Seizure detection and multi-class classification): Population 39
 - FNUSA (Seizure detection and multi-class classification)
 - SeizIt1: population 14
@@ -142,10 +134,4 @@ Fixed the bug in dataset generation
 | 6     | 0.467      | 98.2%     | 74.6%   | 80.8%    | 75.7%  | 81.7%   | 0.605     |
 
 ## Training Configuration
-- Batch Size: 64
-- Learning Rate: 5e-4
-- Weight Decay: 0.05
-- Warmup Epochs: 5
-- Total Epochs: 50 
-- Layer Decay: 0.65
-- Drop Path: 0.1
+- Batch Size: 64, Learning Rate: 5e-4, Weight Decay: 0.05, Warmup Epochs: 5, Total Epochs: 50 , Layer Decay: 0.65, Drop Path: 0.1
