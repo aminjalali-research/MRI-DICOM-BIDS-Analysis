@@ -8,13 +8,9 @@
 - .NPA – metadata wrapper used by NicVue
 
 Can these files be read or anonymized? 
-The .erd formats are compressed and proprietary. Users convert to EDF via Natus GUI instead.
-.erd can be read by unofficial code in Archived XltekDataReader (Python) [(Link)](https://github.com/nyuolab/XltekDataReader)
+The .erd formats are compressed and proprietary, and there is no publicly documented Python library. Users convert to EDF via the Natus GUI instead.
+- .erd can be read by unofficial code in Archived XltekDataReader (Python) [(Link)](https://github.com/nyuolab/XltekDataReader)
 
-# NicVue .NPA Files:
-
-These files are patients' metadata used by older Nicolet systems. There is no publicly documented Python library 
-for reading .NPA files directly, these are typically handled with Natus’s own applications. 
 
 Natus provided a Platform Migration Utility to migrate data from legacy NicVue systems into a NeuroWorks database
 [download.xltek.com](https://download.xltek.com/eeg/Software/Neuroworks/DOC-020491%20REV%2005%20-%20Platform%20Migration%20Utility%20User%20Guide.pdf#:~:text=from%20legacy%20source%20systems%20such,Database%20application%2C%20used%20with%20NeuroWorks). 
@@ -116,7 +112,7 @@ Sent the request form to access TUH dataset
 - https://github.com/UnitedHolmes/seizure_detection_EEGs_transformer_BHI_2023
 - https://github.com/pulp-bio/Artifact-Seizure
 
-# Catwell Arc 3.1.534, we donot have the new App
+# Catwell Arc 3.1.534, waiting for the new App.
 
 
 
