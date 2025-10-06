@@ -78,7 +78,8 @@ print("EEG data loaded and anonymized metadata saved.")
 # Natus 8.5 (long recordings)
 
 Natus’s software suite includes a batch export tool, EDFExport.exe, for converting proprietary files to EDF/EDF+.
-- https://data2bids.greydongilmore.com/run_data2bids/04_neuroworks_export 
+- https://data2bids.greydongilmore.com/run_data2bids/04_neuroworks_export
+  (Create a workflow and put it here to explain)
 
 - Users first create an export template (.exp file) within NeuroWorks: this template defines which channels to include and to de-identify patient info.
 - The template is saved under the Neuroworks Settings directory and must remain there for the exporter to use it. 
