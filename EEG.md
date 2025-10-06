@@ -1,18 +1,15 @@
 # EEG-EMU
 
-1. Nicolet NicVue files (.NPA, .e, .eeg) file types:
+1. Nicolet NicVue bought by Natus (short recordings). File types are:
 
 - .e or .eeg – primary EEG data
 - .erd – raw EEG binary (used by Neuroworks / Xltek systems)
 - .ent – annotations/notes metadata
 - .NPA – metadata wrapper used by NicVue
 
-Can .NPA and .e Nicolet datafile be read or anonymized? They are proprietary and can't be read [Reading xltec data](https://sccn.ucsd.edu/pipermail/eeglablist/2016/010245.html)
-
+Can these files be read or anonymized? 
 The .erd formats are compressed and proprietary. Users convert to EDF via Natus GUI instead.
 .erd can be read by unofficial code in Archived XltekDataReader (Python) [(Link)](https://github.com/nyuolab/XltekDataReader)
-
-https://neuroimage.usc.edu/forums/t/does-anyone-knows-how-to-read-a-nicolet-erd-file/32402
 
 ------------
 EDFExport available - what is the template - does it allow anonymisation? The template structure is undocumented publicly. 
@@ -32,9 +29,17 @@ With a custom template, one can remove or anonymize a patient's name, ID, DOB, e
 
 -edfplus is a quick export using default settings, including whatever default fields are defined (which likely include demographics).
 
+```phd
+c:\NeuroWorks>edfexport -d \\10.40.15.131\public\Archive -edfplus -o "C:\Users\Nicolete\Desktop\GAVINTEST\EDFExport"
+
+c:\NeuroWorks>edfexport -f "C:\Users\Nicolete\Desktop\GAVINTEST\EDFExport\Subject_1.txt"  -o "C:\Users\Nicolete\Desktop\GAVINTEST\EDFExport"
+```
+https://data2bids.greydongilmore.com/run_data2bids/04_neuroworks_export
+
 PyEDFlib – A Python library for reading and writing EEG in (EDF/EDF+). While it doesn’t read Nicolet/Natus proprietary files, it is commonly used to convert and save data to EDF with anonymization functions. For example, pyedflib.highlevel.anonymize_edf() will overwrite patient-identifying header fields with dummy values.
 
 --------
+# Natus 8.5 (long recordings)
 # Natus Official Export Tools
 
 Natus’s software suite includes a batch export tool, EDFExport.exe, for converting proprietary files to EDF/EDF+. This utility is part of the NeuroWorks installation
@@ -124,6 +129,8 @@ Sent the request form to access TUH dataset
   
 - https://github.com/UnitedHolmes/seizure_detection_EEGs_transformer_BHI_2023
 - https://github.com/pulp-bio/Artifact-Seizure
-  
+
+# Catwell Arc 3.1.534, we donot have the new App
+
 
 
